@@ -1,4 +1,10 @@
-# Heroku Buildpack for Elixir
+# Cloud Foundry Buildpack for Elixir
+
+Based on the Heroku buildpack for Elixir by Akash Manohar.
+
+## Web Frameworks
+
+### Phoenix
 
 ### Features
 
