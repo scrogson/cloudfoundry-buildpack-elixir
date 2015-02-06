@@ -2,6 +2,8 @@
 
 Based on the Heroku buildpack for Elixir by Akash Manohar.
 
+# Heroku Buildpack Elixir
+
 ## Web Frameworks
 
 ### Phoenix
