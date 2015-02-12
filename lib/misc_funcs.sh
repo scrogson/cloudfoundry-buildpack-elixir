@@ -68,23 +68,10 @@ function load_config() {
   fi
 
   output_line "Will use the following versions:"
-  output_line "* Stack ${STACK}"
   output_line "* Erlang ${erlang_version}"
   output_line "* Elixir ${elixir_version[0]} ${elixir_version[1]}"
-  output_line "Will export the following config vars:"
-  output_line "* Config vars ${config_vars_to_export}"
 }
 
-
-# Make the config vars from config_vars_to_export available at slug compile time.
-# Useful for compiled languages like Erlang and Elixir
-function export_config_vars() {
-  for config_var in ${config_vars_to_export[@]}; do
-    if [ -d $env_path ] && [ -f $env_path/${config_var} ]; then
-      export ${config_var}=$(cat $env_path/${config_var})
-    fi
-  done
-}
 
 function export_mix_env() {
   if [ -d $env_path ] && [ -f $env_path/MIX_ENV ]; then
@@ -101,16 +88,5 @@ function clean_cache() {
   if [ $always_rebuild = true ]; then
     output_section "Cleaning all cache to force rebuilds"
     rm -rf $cache_path/*
-  else
-    stack_change
   fi
-}
-
-function stack_change() {
-  if [ ! -f "${cache_path}/stack" ] || [ $(cat "${cache_path}/stack") != ${STACK} ]; then
-    output_section "Stack changed, will rebuild"
-    rm -rf ${cache_path}/*
-  fi
-
-  echo ${STACK} > "${cache_path}/stack"
 }

@@ -13,7 +13,6 @@ Based on the Heroku buildpack for Elixir by Akash Manohar.
 * **Easy configuration** with `elixir_buildpack.config` file
 * Use **prebuilt Elixir binaries**
 * Adds the free Heroku Postgres **database upon app creation**
-* `DATABASE_URL` can be made available at compile time adding it to `config_vars_to_export` in `elixir_buildpack.config`
 * Allows configuring Erlang
 * If your app doesn't have a Procfile, default web task `mix server -p $PORT` will be run.
 * Consolidates protocols
@@ -59,9 +58,6 @@ elixir_version=1.0.0
 
 # Always rebuild from scratch on every deploy?
 always_rebuild=false
-
-# Export heroku config vars
-config_vars_to_export=(DATABASE_URL)
 ```
 
 
@@ -93,12 +89,6 @@ erlang_version=17.2
 
 ```
 heroku config:set MY_VAR=the_value
-```
-
-* Add the config vars you want to be exported in your `elixir_buildpack.config` file:
-
-```
-config_vars_to_export=(DATABASE_URL MY_VAR)
 ```
 
 ## Other notes
