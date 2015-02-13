@@ -2,17 +2,10 @@
 
 Based on the Heroku buildpack for Elixir by Akash Manohar.
 
-# Heroku Buildpack Elixir
-
-## Web Frameworks
-
-### Phoenix
-
-### Features
+## Features
 
 * **Easy configuration** with `elixir_buildpack.config` file
 * Use **prebuilt Elixir binaries**
-* Adds the free Heroku Postgres **database upon app creation**
 * Allows configuring Erlang
 * If your app doesn't have a Procfile, default web task `mix server -p $PORT` will be run.
 * Consolidates protocols
@@ -20,31 +13,25 @@ Based on the Heroku buildpack for Elixir by Akash Manohar.
 * Caching of Hex packages, Mix dependencies and downloads
 
 
-#### Version support info
+### Version support info
 
 * Erlang - Prebuilt packages (17.2, 17.1, etc)
-* Elixir - Prebuilt releases (1.0.0, 0.15.1 etc) or prebuilt branches (master, stable, etc)
+* Elixir - Prebuilt releases (1.0.3, 0.15.1 etc) or prebuilt branches (master, stable, etc)
 
 
 ## Usage
 
-#### Create a Heroku app with this buildpack
+### Push/Deloy a Cloud Foundry alication with this buildpack
 
 ```
-heroku create --buildpack "https://github.com/HashNuke/heroku-buildpack-elixir.git"
+cf push APPNAME -b "https://github.com/gogolok/cloudfoundry-buildpack-elixir"
 ```
 
-#### Set the buildpack of an existing Heroku app
-
-```
-heroku config:set BUILDPACK_URL="https://github.com/HashNuke/heroku-buildpack-elixir.git"
-```
-
-## Configuration
+### Configuration
 
 Create a `elixir_buildpack.config` file in your app's root dir. The file's syntax is bash.
 
-If you don't specify a config option, then the default option from the buildpack's [`elixir_buildpack.config`](https://github.com/HashNuke/heroku-buildpack-elixir/blob/master/elixir_buildpack.config) file will be used.
+If you don't specify a config option, then the default option from the buildpack's [`elixir_buildpack.config`](https://github.com/gogolok/cloudfoundry-buildpack-elixir/blob/master/elixir_buildpack.config) file will be used.
 
 
 __Here's a full config file with all available options:__
@@ -54,7 +41,7 @@ __Here's a full config file with all available options:__
 erlang_version=17.2
 
 # Elixir version
-elixir_version=1.0.0
+elixir_version=1.0.3
 
 # Always rebuild from scratch on every deploy?
 always_rebuild=false
@@ -66,7 +53,7 @@ always_rebuild=false
 * Use prebuilt Elixir release
 
 ```
-elixir_version=1.0.0
+elixir_version=1.0.3
 ```
 
 * Use prebuilt Elixir branch, the *branch* specifier ensures that it will be downloaded every time
@@ -83,22 +70,11 @@ elixir_version=(branch master)
 erlang_version=17.2
 ```
 
-#### Specifying config vars to export at compile time
-
-* To set a config var on your heroku node you can exec from the shell:
-
-```
-heroku config:set MY_VAR=the_value
-```
-
 ## Other notes
 
 * Add your own `Procfile` to your application, else the default web task `mix server -p $PORT` will be used.
 
 * To make use of consolidated protocols they need to be added to the loadpath. Example: `elixir -pa _build/prod/consolidated -S mix run --no-halt`.
-
-* If you create an application with this buildpack, then a free database addon`heroku-postgresql:hobby-dev` is also added. The database credentials are available from the env var `DATABASE_URL`.
-
 
 ## Credits
 
