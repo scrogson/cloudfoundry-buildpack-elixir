@@ -53,7 +53,7 @@ function fix_elixir_version() {
   else
     output_line "Invalid Elixir version specified"
     output_line "See the README for allowed formats at:"
-    output_line "https://github.com/gogolok/heroku-buildpack-elixir"
+    output_line "https://github.com/gogolok/cloudfoundry-buildpack-elixir"
     exit 1
   fi
 }
