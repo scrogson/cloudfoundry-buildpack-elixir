@@ -15,7 +15,7 @@ Based on the Heroku buildpack for Elixir by Akash Manohar.
 
 ### Version support info
 
-* Erlang - Prebuilt packages (17.2, 17.1, etc)
+* Erlang - Prebuilt packages (17.4, 17.3, etc)
 * Elixir - Prebuilt releases (1.0.3, 0.15.1 etc) or prebuilt branches (master, stable, etc)
 
 
