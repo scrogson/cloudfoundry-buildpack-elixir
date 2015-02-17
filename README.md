@@ -21,7 +21,7 @@ Based on the Heroku buildpack for Elixir by Akash Manohar.
 
 ## Usage
 
-### Push/Deloy a Cloud Foundry alication with this buildpack
+### Push/Deploy a Cloud Foundry application with this buildpack
 
 ```
 cf push APPNAME -b "https://github.com/gogolok/cloudfoundry-buildpack-elixir"
