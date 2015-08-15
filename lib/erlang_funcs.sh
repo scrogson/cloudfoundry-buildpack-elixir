@@ -4,7 +4,7 @@ function erlang_tarball() {
 
 
 function download_erlang() {
-  erlang_package_url="http://s3.hex.pm/builds/erlang/ubuntu-10.04"
+  erlang_package_url="https://s3.amazonaws.com/s3.hex.pm/builds/erlang/ubuntu-10.04"
 
   erlang_package_url="${erlang_package_url}/$(erlang_tarball)"
 
@@ -16,7 +16,7 @@ function download_erlang() {
     erlang_changed=true
 
     output_section "Fetching Erlang ${erlang_version}"
-    curl -ks ${erlang_package_url} -o ${cache_path}/$(erlang_tarball) || exit 1
+    curl -s ${erlang_package_url} -o ${cache_path}/$(erlang_tarball) || exit 1
   else
     output_section "[skip] Already downloaded Erlang ${erlang_version}"
   fi
