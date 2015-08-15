@@ -16,7 +16,7 @@ Based on the Heroku buildpack for Elixir by Akash Manohar.
 ### Version support info
 
 * Erlang - Prebuilt packages (17.4, 17.3, etc)
-* Elixir - Prebuilt releases (1.0.3, 0.15.1 etc) or prebuilt branches (master, stable, etc)
+* Elixir - Prebuilt releases (1.0.5, 0.15.1 etc) or prebuilt branches (master, stable, etc)
 
 
 ## Usage
@@ -41,7 +41,7 @@ __Here's a full config file with all available options:__
 erlang_version=17.2
 
 # Elixir version
-elixir_version=1.0.3
+elixir_version=1.0.5
 
 # Always rebuild from scratch on every deploy?
 always_rebuild=false
@@ -53,7 +53,7 @@ always_rebuild=false
 * Use prebuilt Elixir release
 
 ```
-elixir_version=1.0.3
+elixir_version=1.0.5
 ```
 
 * Use prebuilt Elixir branch, the *branch* specifier ensures that it will be downloaded every time
