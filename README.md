@@ -72,7 +72,7 @@ erlang_version=17.2
 
 ## Other notes
 
-* Add your own `Procfile` to your application, else the default web task `mix server -p $PORT` will be used.
+* Add your own *Procfile* to your application or use the *command* configuration in the manifest file.
 
 * To make use of consolidated protocols they need to be added to the loadpath. Example: `elixir -pa _build/prod/consolidated -S mix run --no-halt`.
 
