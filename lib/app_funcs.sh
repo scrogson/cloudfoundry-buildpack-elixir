@@ -48,11 +48,36 @@ function app_dependencies() {
   # And all git operations are performed on the respective repos
   unset GIT_DIR
 
-  output_section "Fetching app dependencies with mix"
-  mix deps.get --only prod || exit 1
-
-  output_section "Compiling app dependencies"
-  mix deps.check || exit 1
+  (
+    if [ "$GIT_SSH_KEY" != "" ]; then   
+      status "Detected SSH key for git.  launching ssh-agent and loading key"
+      echo $GIT_SSH_KEY | base64 --decode > id_rsa
+      chmod 0600 id_rsa
+      # launch ssh-agent, we'll use it to serve our ssh key
+      # and kill it towards the end of the buildpack's run
+      eval `ssh-agent -s`
+      # We're not supporting passphrases at this time.  We could pull that in
+      # from config as well, but then we'd have to setup expect or some other
+      # terminal automation tool to feed it into ssh-add.
+      ssh-add id_rsa
+      rm id_rsa
+      # Add github to the list of known hosts - ignore the warning or else set -e will abort the deployment
+      ssh -oStrictHostKeyChecking=no -T git@$GIT_HOST || true
+    fi  
+  
+    output_section "Fetching app dependencies with mix"
+    mix deps.get --only prod || exit 1
+  
+    output_section "Compiling app dependencies"
+    mix deps.check || exit 1
+  
+    if [ "$GIT_SSH_KEY" != "" ]; then
+      # Now that mix has finished running, we shouldn't need the ssh key anymore.  Kill ssh-agent
+      eval `ssh-agent -k`
+      # Clear that sensitive key data from the environment
+      export GIT_SSH_KEY=0
+    fi
+  )
 
   export GIT_DIR=$git_dir_value
   cd - > /dev/null
